@@ -1,56 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:gravity="center_horizontal"
-android:orientation="vertical"
-tools:context=".MainActivity">
-
-<Button
-    android:id="@+id/btn_start_location_updates"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="40dp"
-    android:text="@string/start_updates"
-    android:background="@color/"/>
-
-<Button
-    android:id="@+id/btn_stop_location_updates"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:enabled="false"
-    android:text="@string/stop_updates" />
-
-<Button
-    android:id="@+id/btn_get_last_location"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:text="@string/get_last_location" />
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="50dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:text="Location updates will be received only when app is foreground" />
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-<TextView
-    android:id="@+id/location_result"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:textColor="#333"
-    android:textSize="18sp" />
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-<TextView
-    android:id="@+id/updated_on"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="30dp"
-    android:textSize="13sp" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="?android:attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <Button
+        android:id="@+id/btn_start_location_updates"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@color/darkGreen"
+        android:text="@string/start_updates"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/btn_stop_location_updates"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:enabled="false"
+        android:text="@string/stop_updates" />
+
+    <Button
+        android:id="@+id/btn_get_last_location"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/get_last_location"
+        android:textColor="@color/white"
+        android:background="@color/colorAccent"/>
+
+    <TextView
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal"
+        android:text="Location updates will be received only when app is in the foreground"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/location_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="#333"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/updated_on"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textSize="13sp" />
 
 </LinearLayout>
