@@ -1,4 +1,4 @@
 <resources>
-    <item name="gps_crosshair">@drawable/ic_gps_fixed_24dp</item>
+    <drawable name="gps_crosshair">@drawable/ic_gps_fixed_24dp</drawable>
 
 </resources>
