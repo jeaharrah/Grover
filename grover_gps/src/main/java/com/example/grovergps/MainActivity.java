@@ -262,6 +262,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onPermissionGranted(PermissionGrantedResponse response) {
                         mRequestingLocationUpdates = true;
                         startLocationUpdates();
+                        btnStopUpdates.setBackgroundColor(getColor(R.color.red));
+                        btnStopUpdates.setTextColor(getColor(R.color.white));
                     }
 
                     @Override
@@ -284,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
     public void stopLocationButtonClick() {
         mRequestingLocationUpdates = false;
         stopLocationUpdates();
+        btnStopUpdates.setBackgroundColor(getColor(R.color.mediumGrey));
     }
 
     public void stopLocationUpdates() {
