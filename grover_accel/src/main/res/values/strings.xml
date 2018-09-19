@@ -9,10 +9,10 @@
     <string name="minus_z">-z</string>
     <string name="plus_z">+z</string>
 
-    <string name="right">Right</string>
-    <string name="left">Left</string>
-    <string name="up">Up</string>
-    <string name="down">Down</string>
+    <string name="right">Right\n(+x)</string>
+    <string name="left">Left\n(-x)</string>
+    <string name="up">Up\n(+y)</string>
+    <string name="down">Down\n(-y)</string>
     <string name="forward">Backward</string>
     <string name="backward">Forward</string>
 
