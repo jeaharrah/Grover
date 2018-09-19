@@ -18,8 +18,9 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="accelerometerGuiText">
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>
