@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_speedometer);
 
         senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -44,10 +45,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 .SENSOR_DELAY_NORMAL);
 
         System.out.println(senAccelerometer.getName());
-        System.out.println(senAccelerometer.getName());
 
     }
-
 
     // Float fields that will store accelerometer values for each axis
     float x, y, z;
