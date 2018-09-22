@@ -8,8 +8,10 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 /**
  * Penn State Abington
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
 
+    private static final String TAG = "Accelerometer";
 
     /**
      * @author Jennifer A'Harrah (jka5240)
@@ -40,13 +43,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         senSensorManager.registerListener(this, senAccelerometer, SensorManager
                 .SENSOR_DELAY_NORMAL);
 
+        System.out.println(senAccelerometer.getName());
+        System.out.println(senAccelerometer.getName());
+
     }
 
 
-    // Private fields for shake gesture recognition
-    private long lastUpdate = 0;
-    private float last_x, last_y, last_z;
-    private static final int SHAKE_THRESHOLD = 600;
+    // Float fields that will store accelerometer values for each axis
+    float x, y, z;
 
     /**
      * @author Jennifer A'Harrah (jka5240)
@@ -54,37 +58,55 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
      */
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        Sensor mySensor = sensorEvent.sensor;
+        x = sensorEvent.values[0];
+        y = sensorEvent.values[1];
+        z = sensorEvent.values[2];
 
-        if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            float x = sensorEvent.values[0];
-            float y = sensorEvent.values[1];
-            float z = sensorEvent.values[2];
+        // Output the X accelerometer value to the output debug log
+        Log.d(TAG, "onSensorChanged: X: " + sensorEvent.values[0]);
+        // Output the Y accelerometer value to the output debug log
+        Log.d(TAG, "onSensorChanged: Y: " + sensorEvent.values[1]);
+        // Output the Z accelerometer value to the output debug log
+        Log.d(TAG, "onSensorChanged: Z: " + sensorEvent.values[2]);
 
-            // Stores the current time to the millisecond
-            long currentTime = System.currentTimeMillis();
+        TextView xPlus = findViewById(R.id.xPlus);
+        TextView xMinus = findViewById(R.id.xMinus);
+        TextView yPlus = findViewById(R.id.yPlus);
+        TextView yMinus = findViewById(R.id.yMinus);
 
-            // Check to see if 100 milliseconds have passed since the last time the
-            // onSensorChanged method was invoked
-            if ((currentTime - lastUpdate) > 100) {
-                long diffTime = (currentTime - lastUpdate);
-                lastUpdate = currentTime;
+        if (x > 0) {
+            xPlus.setText(getString(R.string.right, x));
+            xMinus.setText(getString(R.string.inactiveHalf));
+            xPlus.setBackgroundColor(getColor(R.color.yellow));
+            xMinus.setBackgroundColor(getColor(R.color.white));
 
-                //Perform some math calculations to determine the device's speed
-                float speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
-
-                // Statically declare SHAKE_THRESHOLD variable to see whether a shake gesture
-                // has been detected
-                if (speed > SHAKE_THRESHOLD) {
-
-                }
-
-                last_x = x;
-                last_y = y;
-                last_z = z;
-
-            }
         }
+
+        if (x < 0) {
+            xMinus.setText(getString(R.string.left, x));
+            xPlus.setText(getString(R.string.inactiveHalf));
+            xMinus.setBackgroundColor(getColor(R.color.colorAccent));
+            xPlus.setBackgroundColor(getColor(R.color.white));
+
+        }
+
+        if (y > 0) {
+            yPlus.setText(getString(R.string.up, y));
+            yMinus.setText(getString(R.string.inactiveHalf));
+            yPlus.setBackgroundColor(getColor(R.color.messenger_blue));
+            yMinus.setBackgroundColor(getColor(R.color.white));
+
+        }
+
+        if (y < 0) {
+            yMinus.setText(getString(R.string.down, y));
+            yPlus.setText(getString(R.string.inactiveHalf));
+            yMinus.setBackgroundColor(getColor(R.color.mediumGreen));
+            yPlus.setBackgroundColor(getColor(R.color.white));
+
+        }
+
+
     }
 
     /**
