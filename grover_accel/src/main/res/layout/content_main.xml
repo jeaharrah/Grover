@@ -20,8 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:text="@string/left"
-            android:background="@color/colorAccent"
+            android:text=""
             android:textAppearance="@style/accelerometerGuiText"
             android:gravity="center"
             android:textColor="@color/white"/>
@@ -31,8 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:text="@string/right"
-            android:background="@color/yellow"
+            android:text=""
             android:textAppearance="@style/accelerometerGuiText"
             android:gravity="center"
             android:textColor="@color/black"/>
@@ -52,7 +50,6 @@
             android:layout_height="0dp"
             android:layout_weight="0.25"
             android:text="@string/up"
-            android:background="@color/messenger_blue"
             android:textAppearance="@style/accelerometerGuiText"
             android:gravity="center"
             android:textColor="@color/white"/>
@@ -75,7 +72,6 @@
             android:layout_height="0dp"
             android:layout_weight="0.25"
             android:text="@string/down"
-            android:background="@color/mediumGreen"
             android:textAppearance="@style/accelerometerGuiText"
             android:gravity="center"
             android:textColor="@color/white"/>
