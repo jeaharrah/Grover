@@ -9,11 +9,15 @@
     <string name="minus_z">-z</string>
     <string name="plus_z">+z</string>
 
-    <string name="right" formatted="true">Right (+x):\n %s</string>
-    <string name="left" formatted="true">Left(-x):\n %s</string>
-    <string name="up" formatted="true">Up (+y):\n %s</string>
-    <string name="down" formatted="true">Down (-y):\n %s</string>
+    <string name="right" formatted="true">%s</string>
+    <string name="left" formatted="true">%s</string>
+    <string name="up" formatted="true">%s</string>
+    <string name="down" formatted="true">%s</string>
+
     <string name="forward">Backward</string>
     <string name="backward">Forward</string>
+
+    <string name="inactiveHalf">
+    </string>
 
 </resources>
