@@ -1,6 +1,10 @@
 <resources>
-    <string name="app_name">GroverAccel</string>
+    <string name="app_name">Grover Accelerometer</string>
     <string name="action_settings">Settings</string>
+
+    <string name="x" formatted="true">X: %s</string>
+    <string name="y" formatted="true">Y: %s</string>
+    <string name="z" formatted="true">Z: %s</string>
 
     <string name="x_plus">+x</string>
     <string name="x_minus">-x</string>
