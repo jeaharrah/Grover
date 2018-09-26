@@ -68,7 +68,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         // Output the Z accelerometer value to the output debug log
         Log.d(TAG, "onSensorChanged: Z: " + sensorEvent.values[2]);
 
-        TextView xPlus = findViewById(R.id.xPlus);
+        TextView xTxtView = findViewById(R.id.xOutput);
+        TextView yTxtView = findViewById(R.id.yOutput);
+        TextView zTxtView = findViewById(R.id.zOutput);
+
+        String formattedXString = getString(R.string.x);
+        String formattedYString = getString(R.string.y);
+        String formattedZString = getString(R.string.z);
+
+        xTxtView.setText(getString(R.string.x, x));
+        yTxtView.setText(getString(R.string.y, y));
+        zTxtView.setText(getString(R.string.z, z));
+
+        /*TextView xPlus = findViewById(R.id.xPlus);
         TextView xMinus = findViewById(R.id.xMinus);
         TextView yPlus = findViewById(R.id.yPlus);
         TextView yMinus = findViewById(R.id.yMinus);
@@ -103,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             yMinus.setBackgroundColor(getColor(R.color.mediumGreen));
             yPlus.setBackgroundColor(getColor(R.color.white));
 
-        }
+        }*/
 
 
     }
