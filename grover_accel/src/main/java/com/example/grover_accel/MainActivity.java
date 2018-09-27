@@ -14,8 +14,9 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 /**
- * Penn State Abington Grover ("Ground-based Rover") Project Accelerometer App Retrieves
- * accelerometer data from the phone attached to the Grover Code taken from tutorial at:
+ * Penn State Abington Grover ("Ground-based Rover") Project - Accelerometer App.
+ * Retrieves accelerometer data from the phone attached to the Grover
+ * Code taken from tutorial at:
  * https://code.tutsplus.com/tutorials/using-the-accelerometer-on-android--mobile-22125
  * <p>
  * Accelerometers use the standard sensor coordinate system. In practice, this means that the

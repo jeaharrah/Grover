@@ -50,6 +50,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * Penn State Abington Grover ("Ground-based Rover") Project - GPS App
+ * Retrieves location data from the phone attached to the Grover
+ * Taken from:
  * Reference: https://github.com/googlesamples/android-play-location/tree/master/LocationUpdates
  * Tutorial: https://www.androidhive.info/2015/02/android-location-api-using-google-play-services/#
  */
