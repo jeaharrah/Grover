@@ -14,18 +14,26 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 /**
- * Penn State Abington
- * Grover ("Ground-based Rover") Project
- * Accelerometer App
- * Retrieves accelerometer data from the phone attached to the Grover
- * Code taken from tutorial at: https://code.tutsplus.com/tutorials/using-the-accelerometer-on-android--mobile-22125
+ * Penn State Abington Grover ("Ground-based Rover") Project Accelerometer App Retrieves
+ * accelerometer data from the phone attached to the Grover Code taken from tutorial at:
+ * https://code.tutsplus.com/tutorials/using-the-accelerometer-on-android--mobile-22125
+ * <p>
+ * Accelerometers use the standard sensor coordinate system. In practice, this means that the
+ * following conditions apply when a device is laying flat on a table in its natural orientation:
+ * <p>
+ * If you push the device on the left side (so it moves to the right), the x acceleration value is
+ * positive. If you push the device on the bottom (so it moves away from you), the y acceleration
+ * value is positive. If you push the device toward the sky with an acceleration of A m/s2, the z
+ * acceleration value is equal to A + 9.81, which corresponds to the acceleration of the device (+A
+ * m/s2) minus the force of gravity (-9.81 m/s2). The stationary device will have an acceleration
+ * value of +9.81, which corresponds to the acceleration of the device (0 m/s2 minus the force of
+ * gravity, which is -9.81 m/s2)
  */
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
-
     private static final String TAG = "Accelerometer";
 
     /**
@@ -52,11 +60,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     float x, y, z;
 
     /**
-     * @author Jennifer A'Harrah (jka5240)
      * @param sensorEvent
+     * @author Jennifer A'Harrah (jka5240)
      */
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
+
         x = sensorEvent.values[0];
         y = sensorEvent.values[1];
         z = sensorEvent.values[2];
@@ -121,8 +130,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     /**
-     *
-     * @param sensor - the device sensor
+     * @param sensor   - the device sensor
      * @param accuracy - the integer accuracy of the sensor
      */
     @Override
