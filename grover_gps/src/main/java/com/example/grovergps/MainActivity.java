@@ -73,10 +73,10 @@ public class MainActivity extends AppCompatActivity {
     // location last updated time
     private String mLastUpdateTime;
 
-    // location updates interval - 10sec
+    // location updates interval - 1 second
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
 
-    // fastest updates interval - 5 sec
+    // fastest updates interval - 1 second
     // location updates will be received if another app is requesting the locations
     // than your app can handle
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
@@ -166,8 +166,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateLocationUI() {
         if (mCurrentLocation != null) {
             txtLocationResult.setText(
-                    "Lat: " + mCurrentLocation.getLatitude() + ", " +
-                            "Lng: " + mCurrentLocation.getLongitude()
+                    String.format("Lat: %s, Lng: %s", mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude())
             );
 
             // giving a blink animation on TextView
@@ -175,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
             txtLocationResult.animate().alpha(1).setDuration(300);
 
             // location last updated time
-            txtUpdatedOn.setText("Last updated on: " + mLastUpdateTime);
+            txtUpdatedOn.setText(String.format("Last updated on: %s", mLastUpdateTime));
         }
 
         toggleButtons();
