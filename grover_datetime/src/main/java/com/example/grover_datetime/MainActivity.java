@@ -1,13 +1,16 @@
 package com.example.grover_datetime;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,14 +21,32 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+    }
+
+    private long dateLong = System.currentTimeMillis();
+
+    public void getDate(View view) {
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        String weekDayName = dayFormat.format(dateLong);
+
+        DateFormat date = DateFormat.getDateInstance(DateFormat.LONG, Locale.US);
+        String dateString = date.format(dateLong);
+
+        DateFormat time = DateFormat.getTimeInstance(DateFormat.HOUR_OF_DAY0_FIELD);
+        String timeString = time.format(dateLong);
+
+        display(weekDayName, dateString, timeString);
+    }
+
+    private void display(String weekday, String date, String time) {
+        TextView weekdayTxtView = (TextView) findViewById(R.id.wordTxtView);
+        weekdayTxtView.setText(weekday);
+
+        TextView dateTxtView = (TextView) findViewById(R.id.dateTxtView);
+        dateTxtView.setText(date);
+
+        TextView timeTxtView = (TextView) findViewById(R.id.timeTxtView);
+        timeTxtView.setText(time);
     }
 
     @Override
