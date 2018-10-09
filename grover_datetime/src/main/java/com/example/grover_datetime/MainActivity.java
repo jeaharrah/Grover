@@ -7,11 +7,16 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+// Imports for Calendar and Date
+import java.util.Calendar;
+import java.util.Date;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
+/**
+ * Penn State Abington Grover ("Ground-based Rover") Project - Date/Time App.
+ * This Grover app displays the date and time and updates it when the button is pressed.
+ *
+ * @author Jennifer A'Harrah (jka5240)
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -21,32 +26,24 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-    }
-
-    private long dateLong = System.currentTimeMillis();
-
-    public void getDate(View view) {
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
-        String weekDayName = dayFormat.format(dateLong);
-
-        DateFormat date = DateFormat.getDateInstance(DateFormat.LONG, Locale.US);
-        String dateString = date.format(dateLong);
-
-        DateFormat time = DateFormat.getTimeInstance(DateFormat.HOUR_OF_DAY0_FIELD);
-        String timeString = time.format(dateLong);
-
-        display(weekDayName, dateString, timeString);
-    }
-
-    private void display(String weekday, String date, String time) {
-        TextView weekdayTxtView = (TextView) findViewById(R.id.wordTxtView);
-        weekdayTxtView.setText(weekday);
-
-        TextView dateTxtView = (TextView) findViewById(R.id.dateTxtView);
-        dateTxtView.setText(date);
-
+        // Set the TextView widget text with the date and time instance from the Calendar class
+        Date currentTime = Calendar.getInstance().getTime();
         TextView timeTxtView = (TextView) findViewById(R.id.timeTxtView);
-        timeTxtView.setText(time);
+        timeTxtView.setText(currentTime.toString());
+
+    }
+
+    /**
+     * Update the date/time when the XML button is pressed
+     * @param view - so that the XML button can use this method in the onClick attribute
+     * @author Jennifer A'Harrah (jka5240)
+     */
+    public void getDate(View view) {
+
+        Date currentTime = Calendar.getInstance().getTime();
+        TextView timeTxtView = (TextView) findViewById(R.id.timeTxtView);
+        timeTxtView.setText(currentTime.toString());
+
     }
 
     @Override
