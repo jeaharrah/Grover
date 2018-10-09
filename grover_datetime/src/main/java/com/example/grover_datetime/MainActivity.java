@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        toolbar.setNavigationIcon(R.drawable.ic_clock);
+
         // Set the TextView widget text with the date and time instance from the Calendar class
         Date currentTime = Calendar.getInstance().getTime();
         TextView timeTxtView = (TextView) findViewById(R.id.timeTxtView);
