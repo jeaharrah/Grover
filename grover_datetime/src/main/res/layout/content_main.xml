@@ -19,7 +19,7 @@
     android:gravity="center"
     android:text="@string/sampleTime"
     android:textColor="@color/black"
-    android:textSize="60sp" />
+    android:textSize="44sp" />
 
     <!--<TextView
         android:id="@+id/weekday"
