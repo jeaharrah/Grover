@@ -13,7 +13,7 @@ import java.util.Date;
 
 /**
  * Penn State Abington Grover ("Ground-based Rover") Project - Date/Time App.
- * This Grover app displays the date and time and updates it when the button is pressed.
+ * This app displays the date and time of the rover phone and updates it when the button is pressed.
  *
  * @author Jennifer A'Harrah (jka5240)
  */
