@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/grover_accel" />
+            <option value="$PROJECT_DIR$/grover_camera" />
             <option value="$PROJECT_DIR$/grover_datetime" />
             <option value="$PROJECT_DIR$/grover_gps" />
             <option value="$PROJECT_DIR$/grovergps" />
