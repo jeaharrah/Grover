@@ -7,57 +7,41 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center">
 
     <TextView
     android:id="@+id/timeTxtView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="150dp"
-    android:layout_marginBottom="60dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:layout_marginBottom="15dp"
     android:fontFamily="sans-serif"
     android:gravity="center"
-    android:text="@string/sampleTime"
+    android:text="@string/sampleDateTime"
     android:textColor="@color/black"
     android:textSize="44sp" />
 
-    <!--<TextView
-        android:id="@+id/weekday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:gravity="center"
-        tools:text="@tools:sample/date/day_of_week"
-        android:textColor="@color/black"
-        android:textSize="48sp" />
-
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/julianTxtView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="45dp"
         android:fontFamily="sans-serif"
         android:gravity="center"
-        tools:text="@tools:sample/date/ddmmyy"
+        android:text="@string/julian_text_placeholder"
         android:textColor="@color/black"
-        android:textSize="48sp" />
-
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:gravity="center"
-        tools:text="@tools:sample/date/hhmmss"
-        android:textColor="@color/black"
-        android:layout_marginBottom="30sp"
-        android:textSize="48sp" />-->
+        android:textSize="44sp" />
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:textSize="32sp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:text="Update"
-        android:onClick="getDate"
+        android:onClick="displayDateInfo"
         android:background="@color/darkGreen"
         android:textColor="@color/white"/>
 
