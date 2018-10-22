@@ -1,1 +1,1 @@
-include ':app', ':grovertemp', ':grover_gps', ':grover_gps', ':grover_gps', ':grover_accel', ':grover_gps', ':grovergps', ':grover_datetime', ':grover_camera', ':grover_flashlight'
+include ':app', ':grovertemp', ':grover_gps', ':grover_gps', ':grover_gps', ':grover_accel', ':grover_gps', ':grover_datetime', ':grover_camera', ':grover_flashlight'
