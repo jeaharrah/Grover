@@ -3,5 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="flash_on">Flash On</string>
     <string name="flash_off">Flash Off</string>
+    <string name="enable_flash">Enable Flash</string>
+    <string name="disable_flash">Disable Flash </string>
 
 </resources>
