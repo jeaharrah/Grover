@@ -4,9 +4,7 @@
 
     <permission android:name="android.permission.FLASHLIGHT"
         android:permissionGroup="android.permission-group.HARDWARE_CONTROLS"
-        android:protectionLevel="normal"
-        android:label="Camera Flashlight"
-        android:description="Camera Flashlight" />
+        android:label="Camera Flashlight" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/ThemeOverlay.AppCompat">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -27,7 +25,6 @@
             </intent-filter>
         </activity>
     </application>
-
 
 
 </manifest>
