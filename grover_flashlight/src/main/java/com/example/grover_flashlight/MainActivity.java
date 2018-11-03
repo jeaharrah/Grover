@@ -18,7 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean flashLightStatus;
     private static final int CAMERA_REQUEST = 50;
     private ImageView imageFlashlight;
-    private ToggleButton buttonEnable;
+    private Button buttonEnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //imageFlashlight = (ImageView) findViewById(R.id.imageFlashlight);
-        buttonEnable = (ToggleButton) findViewById(R.id.buttonEnable);
+        buttonEnable = (Button) findViewById(R.id.buttonEnable);
 
         final boolean hasCameraFlash = getPackageManager().hasSystemFeature(PackageManager
                 .FEATURE_CAMERA_FLASH);
