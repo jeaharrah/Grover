@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 == PackageManager.PERMISSION_GRANTED;
 
         buttonEnable.setEnabled(!isEnabled);
-        //imageFlashlight.setEnabled(isEnabled);
 
         buttonEnable.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         .permission.CAMERA}, CAMERA_REQUEST);
             }
         });
+
 
         imageFlashlight.setOnClickListener(new View.OnClickListener() {
                                                @Override
@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void flashLightOn() {
-        getApplicationContext();
         CameraManager cameraManager = (CameraManager) getSystemService(CAMERA_SERVICE);
 
         try {
@@ -119,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 String cameraId = cameraManager.getCameraIdList()[0];
                 cameraManager.setTorchMode(cameraId, false);
                 buttonEnable.setText(getString(R.string.disable_flash));
+                flashLightStatus = false;
 
                 //imageFlashlight.setImageResource(R.drawable.btn_switch_off);
             }
