@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     public CameraManager cameraManager;
     private static final String TAG = "MainActivity.java";
-    private boolean flashLightStatus;
+    private boolean flashLightOn;
     private static final int CAMERA_REQUEST = 50;
     private ImageView imageFlashlight;
     private Button buttonEnable;
@@ -35,18 +35,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        System.out.println("Made it through the content setup");
 
-        //imageFlashlight = (ImageView) findViewById(R.id.imageFlashlight);
+        // Retrieve the button widget to activate and deactivate the flash
         buttonEnable = (Button) findViewById(R.id.buttonEnable);
 
         final boolean hasCameraFlash = getPackageManager().hasSystemFeature(PackageManager
                 .FEATURE_CAMERA_FLASH);
 
+        // Check whether the flash permission has been enabled on the device
         boolean isEnabled = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED;
 
         buttonEnable.setEnabled(!isEnabled);
 
+        // Set onClick listener for the button
+        // If pressed, the program will request permission to access the camera
         buttonEnable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,41 +59,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        imageFlashlight.setOnClickListener(new View.OnClickListener() {
-                                               @Override
-                                               public void onClick(View view) {
-                                                   if (hasCameraFlash) {
-                                                       if (flashLightStatus)
-                                                           flashLightOff();
-                                                       else
-                                                           flashLightOn();
-                                                   } else {
-                                                       Toast.makeText(MainActivity.this, "No flash available on your device", Toast
-                                                               .LENGTH_SHORT).show();
-                                                   }
-                                               }
-                                           });
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        /* If the first onClick listener is called and the user grants the program's request
+           to access the camera, call the methods to turn the flashlight on or off
+           depending on the current on or off state of the flash.
+           If there is no flash available on the device, display a Toast message.
+        */
+        buttonEnable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (hasCameraFlash) {
+                    if (flashLightOn)
+                        flashLightOff();
+                    else
+                        flashLightOn();
+                } else {
+                    Toast.makeText(MainActivity.this, "No flash available on your device", Toast
+                            .LENGTH_SHORT).show();
+                }
             }
         });
 
-
-    }
-
-
-    public boolean deviceHasFlash(Context context) {
-        context = MainActivity.this;
-        boolean hasFlash = context.getPackageManager().hasSystemFeature(PackageManager
-                .FEATURE_CAMERA_FLASH);
-
-        return hasFlash;
     }
 
     private void flashLightOn() {
@@ -101,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
             if (cameraManager != null) {
                 cameraId = cameraManager.getCameraIdList()[0];
                 cameraManager.setTorchMode(cameraId, true);
-                flashLightStatus = true;
-                //imageFlashlight.setImageResource(R.drawable.btn_switch_on);
+                flashLightOn = true;
+                buttonEnable.setText(R.string.enable_flash);
             }
 
         } catch (CameraAccessException e) {
@@ -118,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 String cameraId = cameraManager.getCameraIdList()[0];
                 cameraManager.setTorchMode(cameraId, false);
                 buttonEnable.setText(getString(R.string.disable_flash));
-                flashLightStatus = false;
+                flashLightOn = false;
 
                 //imageFlashlight.setImageResource(R.drawable.btn_switch_off);
             }
@@ -137,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
                         .PERMISSION_GRANTED) {
                     buttonEnable.setEnabled(false);
                     buttonEnable.setText(getString(R.string.enable_flash));
-                    imageFlashlight.setEnabled(true);
                 } else {
                     Toast.makeText(MainActivity.this, "Permission Denied for the Camera", Toast
                             .LENGTH_SHORT).show();
