@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean flashLightOn;
     private static final int CAMERA_REQUEST = 50;
     private ImageView imageFlashlight;
+    private TextView flashStatus;
     private Button buttonEnable;
 
     @Override
@@ -83,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void flashLightOn() {
         CameraManager cameraManager = (CameraManager) getSystemService(CAMERA_SERVICE);
-
+        flashStatus = findViewById(R.id.flashStatus);
+        imageFlashlight = findViewById(R.id.imageFlashStatus);
         try {
             String cameraId = null;
 
@@ -91,13 +94,19 @@ public class MainActivity extends AppCompatActivity {
                 cameraId = cameraManager.getCameraIdList()[0];
                 cameraManager.setTorchMode(cameraId, true);
                 flashLightOn = true;
-                buttonEnable.setText(R.string.enable_flash);
+                // Update the button text according to the flash activation state
+                buttonEnable.setText(R.string.disable_flash);
+                buttonEnable.setBackgroundColor(getColor((R.color.red)));
+                imageFlashlight.setImageResource(R.drawable.ic_flash);
+                flashStatus.setText(R.string.flash_on);
             }
 
         } catch (CameraAccessException e) {
             Log.e(TAG, "Camera access failed", e);
         }
     }
+
+
 
     private void flashLightOff() {
         cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
@@ -106,10 +115,12 @@ public class MainActivity extends AppCompatActivity {
             if (cameraManager != null) {
                 String cameraId = cameraManager.getCameraIdList()[0];
                 cameraManager.setTorchMode(cameraId, false);
-                buttonEnable.setText(getString(R.string.disable_flash));
+                buttonEnable.setText(getString(R.string.enable_flash));
                 flashLightOn = false;
+                buttonEnable.setBackgroundColor(getColor((R.color.darkGreen)));
+                imageFlashlight.setImageResource(R.drawable.ic_flash_off);
+                flashStatus.setText(R.string.flash_off);
 
-                //imageFlashlight.setImageResource(R.drawable.btn_switch_off);
             }
         } catch (CameraAccessException e) {
             Log.e(TAG, "Camera access failed", e);

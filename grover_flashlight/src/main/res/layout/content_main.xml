@@ -6,6 +6,26 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <ImageView
+        android:id = "@+id/imageFlashStatus"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_above="@id/flashStatus"
+        android:src="@drawable/ic_flash_off"/>
+
+    <TextView
+        android:id="@+id/flashStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/buttonEnable"
+        android:paddingBottom="25dp"
+        android:text="@string/flash_off"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"/>
+
     <Button
         android:id="@+id/buttonEnable"
         android:layout_width="match_parent"
