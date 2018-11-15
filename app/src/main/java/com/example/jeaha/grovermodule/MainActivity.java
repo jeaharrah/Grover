@@ -9,7 +9,37 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.database.Cursor;
+import android.database.sqlite.*;
+
 public class MainActivity extends AppCompatActivity {
+    // Database name
+    private static final String DATABASE_NAME = "GroverDB";
+
+    // Table names
+    private static final String TABLE_FLASHLIGHT = "Flashlight";
+    private static final String TABLE_GPS = "GPS";
+    private static final String TABLE_ACCELEROMETER = "Accelerometer";
+    private static final String TABLE_TEMPERATURE = "Temperature";
+
+    // Table Columns Names
+    private static final String FLASHLIGHT_KEY_ID = "FlashlightID";
+    private static final String FLASHLIGHT_STATE = "FlashlightState";
+
+    private static final String GPS_KEY_ID = "GpsID";
+    private static final String GPS_NAME = "GpsName";
+
+    private static final String ACCELEROMETER_KEY_ID = "AccelerometerID";
+    private static final String ACCELEROMETER_X_NAME = "AccelerometerXName";
+    private static final String ACCELEROMETER_Y_NAME = "AccelerometerYName";
+    private static final String ACCELEROMETER_Z_NAME = "AccelerometerZName";
+
+    private static final String TEMPERATURE_KEY_ID = "TemperatureID";
+    private static final String TEMPERATURE_NAME = "TemperatureName";
+    private static final String TEMPERATURE_UNIT = "TemperatureUnit";
+
+
+    SQLiteDatabase db = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
