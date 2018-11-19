@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Grover</string>
     <string name="action_settings">Settings</string>
+    <string name="flashlight">Flashlight</string>
+    <string name="gps">GPS</string>
+    <string name="accelerometer">Accelerometer</string>
+    <string name="temperature">Temperature</string>
+    <string name="temp">Temp</string>
+
 </resources>
