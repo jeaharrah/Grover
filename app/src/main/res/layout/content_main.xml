@@ -7,39 +7,99 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="2">
 
-    <GridView
-        android:id="@+id/gridViewFlashlight"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        android:layout_weight=".25"/>
+        android:layout_height="65dp"
+        android:src="@drawable/ic_gps_fixed_24dp"
+        android:tint="@color/colorAccent"
+        android:paddingTop="5dp"/>
 
-    <GridView
-        android:id="@+id/gridViewGps"
+    <LinearLayout
+        android:id="@+id/buttonBar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        android:layout_weight=".25"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="1">
 
-    <GridView
-        android:id="@+id/gridViewAccel"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        android:layout_weight=".25"/>
+        <Button style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/flashlightBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".27"
+            android:text="@string/flashlight"
+            android:background="@drawable/button_selector"
+            android:maxLines="1" />
 
-    <GridView
-        android:id="@+id/gridViewTemp"
+        <Button style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/gpsBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".15"
+            android:text="@string/gps"
+            android:background="@drawable/button_selector"
+            android:enabled="false" />
+
+        <Button style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/accelBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/accelerometer"
+            android:background="@drawable/button_selector"
+            android:layout_weight=".38"
+            android:enabled="false"
+            android:maxLines="1" />
+
+        <Button style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/tempBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/temp"
+            android:background="@drawable/button_selector"
+            android:layout_weight=".20"
+            android:enabled="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/gridviewLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        android:layout_weight=".25"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <GridView
+            android:id="@+id/gridViewFlashlight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/orange"
+            android:visibility="visible"/>
+
+        <GridView
+            android:id="@+id/gridViewGps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:visibility="visible"/>
+
+        <GridView
+            android:id="@+id/gridViewAccel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/messenger_blue"
+            android:visibility="visible"/>
+
+        <GridView
+            android:id="@+id/gridViewTemp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mediumGreen"
+            android:visibility="visible"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>
