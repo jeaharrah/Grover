@@ -37,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Sensor senAccelerometer;
     private static final String TAG = "Accelerometer";
 
+    private static final String TABLE_ACCELEROMETER = "Accelerometer";
+    private static final String ACCELEROMETER_KEY_ID = "AccelerometerID";
+    private static final String ACCELEROMETER_X_NAME = "AccelerometerXName";
+    private static final String ACCELEROMETER_Y_NAME = "AccelerometerYName";
+    private static final String ACCELEROMETER_Z_NAME = "AccelerometerZName";
+
     /**
      * @author Jennifer A'Harrah (jka5240)
      */

@@ -3,6 +3,8 @@ package com.example.grover_flashlight;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.hardware.camera2.*;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,10 +18,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +36,16 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageFlashlight;
     private TextView flashStatus;
     private Button buttonEnable;
+
+    // Database name
+    private static final String DATABASE_NAME = "GroverDB";
+    // Table name
+    private static final String TABLE_FLASHLIGHT = "FLASHLIGHT";
+    // Column names
+    private static final String FLASHLIGHT_KEY_ID = "FlashlightID";
+    private static final String FLASHLIGHT_NAME = "FlashlightName";
+
+    SQLiteDatabase db = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +96,50 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        GridView gridF = (GridView) findViewById(R.id.gridViewFlashlight);
+
+        try {
+            // MODE_PRIVATE = only this application
+            db = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
+            // Remove the table and start fresh
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_FLASHLIGHT);
+
+            db.execSQL(" CREATE TABLE IF NOT EXISTS " + TABLE_FLASHLIGHT + "(" + FLASHLIGHT_KEY_ID
+                    + " INTEGER PRIMARY KEY AUTOINCREMENT, " + FLASHLIGHT_NAME + " VARCHAR);");
+
+            db.execSQL("INSERT INTO " + TABLE_FLASHLIGHT + "(" + FLASHLIGHT_NAME + ") VALUES " +
+                    "('ON');");
+            db.execSQL("INSERT INTO " + TABLE_FLASHLIGHT + "(" + FLASHLIGHT_NAME + ") VALUES " +
+                    "('OFF');");
+
+            ArrayList<String> list1 = new ArrayList<String>();
+
+            ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(),
+                    android.R.layout.simple_spinner_item, list1);
+
+            // Select a record and set the cursor object
+            Cursor cursor = db.rawQuery("Select * FROM " + TABLE_FLASHLIGHT, null);
+            if (cursor != null && cursor.moveToPosition(0)) {
+                cursor.moveToFirst();
+                do {
+                    list1.add(cursor.getString(1));
+                    gridF.setAdapter(adapter1);
+                    gridF.setVisibility(View.VISIBLE);
+
+                } while (cursor.moveToNext());
+            }
+
+        } catch (Exception e) {
+            Log.d(TAG, e.toString());
+            Log.e("Error:", e.toString());
+            Toast.makeText(getApplicationContext(), "Database Issue: " + e.toString(), Toast
+                    .LENGTH_LONG).show();
+        }
+        finally { // This will always execute
+            Log.d("Data written:", " ");
+            db.close();
+        }
 
     }
 
