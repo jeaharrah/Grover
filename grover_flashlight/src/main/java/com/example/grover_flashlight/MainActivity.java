@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        GridView gridF = (GridView) findViewById(R.id.gridViewFlashlight);
+        /*GridView gridF = (GridView) findViewById(R.id.gridViewFlashlight);
 
         try {
             // MODE_PRIVATE = only this application
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         finally { // This will always execute
             Log.d("Data written:", " ");
             db.close();
-        }
+        }*/
 
     }
 
