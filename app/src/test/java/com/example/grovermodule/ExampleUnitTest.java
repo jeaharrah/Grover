@@ -1,4 +1,4 @@
-package com.example.grover_camera;
+package com.example.grovermodule;
 
 import org.junit.Test;
 

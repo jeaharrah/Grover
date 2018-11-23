@@ -1,9 +1,5 @@
-package com.example.jeaha.grovermodule;
+package com.example.grovermodule;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.graphics.Color;
-import android.net.Network;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
