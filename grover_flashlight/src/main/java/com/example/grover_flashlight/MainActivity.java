@@ -112,21 +112,33 @@ public class MainActivity extends AppCompatActivity {
                     "('ON');");
             db.execSQL("INSERT INTO " + TABLE_FLASHLIGHT + "(" + FLASHLIGHT_NAME + ") VALUES " +
                     "('OFF');");
+            db.execSQL("INSERT INTO " + TABLE_FLASHLIGHT + "(" + FLASHLIGHT_NAME + ") VALUES " +
+                    "('GLITCHING');");
 
-            ArrayList<String> list1 = new ArrayList<String>();
+            ArrayList<String> list = new ArrayList<String>();
+            ArrayList<String> list2 = new ArrayList<String>();
 
             ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(),
-                    android.R.layout.simple_spinner_item, list1);
+                    android.R.layout.simple_spinner_item, list);
 
             // Select a record and set the cursor object
             Cursor cursor = db.rawQuery("Select * FROM " + TABLE_FLASHLIGHT, null);
-            if (cursor != null && cursor.moveToPosition(0)) {
+            if (cursor != null) {
                 cursor.moveToFirst();
                 do {
-                    list1.add(cursor.getString(1));
-                    for (int i = 0; i < list1.size(); i++) {
-                        Log.i("DATABASE ITEM", list1.get(i));
+                    list.add(cursor.getString(1));
+                    list2.add(cursor.getString(0));
+                    for (int i = 0; i < list2.size(); i++) {
+                        String msg = list2.get(i) + ": " + list.get(i);
+                        Log.i("DATABASE ITEM", msg);
                     }
+                    /*for (int i = 0; i < list2.size(); i++) {
+                        Log.i("DATABASE ITEM ID", list2.get(i));
+                    }
+
+                    for (int i = 0; i < list.size(); i++) {
+                        Log.i("DATABASE ITEM", list.get(i));
+                    }*/
                     //gridF.setAdapter(adapter1);
                     //gridF.setVisibility(View.VISIBLE);
 
