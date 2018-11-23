@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*GridView gridF = (GridView) findViewById(R.id.gridViewFlashlight);
+        //GridView gridF = (GridView) findViewById(R.id.gridViewFlashlight);
 
         try {
             // MODE_PRIVATE = only this application
@@ -124,8 +124,11 @@ public class MainActivity extends AppCompatActivity {
                 cursor.moveToFirst();
                 do {
                     list1.add(cursor.getString(1));
-                    gridF.setAdapter(adapter1);
-                    gridF.setVisibility(View.VISIBLE);
+                    for (int i = 0; i < list1.size(); i++) {
+                        Log.i("DATABASE ITEM", list1.get(i));
+                    }
+                    //gridF.setAdapter(adapter1);
+                    //gridF.setVisibility(View.VISIBLE);
 
                 } while (cursor.moveToNext());
             }
@@ -139,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
         finally { // This will always execute
             Log.d("Data written:", " ");
             db.close();
-        }*/
+        }
 
     }
 
