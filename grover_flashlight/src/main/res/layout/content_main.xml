@@ -40,5 +40,18 @@
         android:textColor="@color/white"
         android:textSize="25sp" />
 
+    <Button
+        android:id="@+id/buttonDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/darkGreen"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Show DB Entries"
+        android:textColor="@color/white"
+        android:layout_below="@id/buttonEnable"
+        android:textSize="18sp"
+        android:onClick="showDbEntries"/>
+
 
 </RelativeLayout>

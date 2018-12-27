@@ -4,12 +4,12 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteAccessPermException;
 import android.database.sqlite.SQLiteDatabase;
 import android.hardware.camera2.*;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,13 +19,19 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+import static android.provider.BaseColumns._ID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,12 +44,20 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonEnable;
 
     // Database name
-    private static final String DATABASE_NAME = "GroverDB";
+    static final String DATABASE_NAME = "Grover.db";
     // Table name
-    private static final String TABLE_FLASHLIGHT = "FLASHLIGHT";
+    static final String TABLE_NAME = "Flashlight";
     // Column names
-    private static final String FLASHLIGHT_KEY_ID = "FlashlightID";
-    private static final String FLASHLIGHT_NAME = "FlashlightName";
+    static final String COLUMN_NAME_MODE = "mode";
+    static final String COLUMN_NAME_DATE = "date";
+    static final String COLUMN_NAME_ID = "ID";
+
+    /*static final String SQL_CREATE_ENTRIES =
+            "CREATE TABLE " + TABLE_NAME + " (INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_NAME_MODE + " VARCHAR, " + COLUMN_NAME_DATE + " VARCHAR)";*/
+
+    static final String SQL_DELETE_ENTRIES =
+            "DROP TABLE IF EXISTS " + TABLE_NAME;
 
     SQLiteDatabase db = null;
 
@@ -53,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        System.out.println("Made it through the content setup");
 
         // Retrieve the button widget to activate and deactivate the flash
         buttonEnable = (Button) findViewById(R.id.buttonEnable);
@@ -97,65 +110,94 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //GridView gridF = (GridView) findViewById(R.id.gridViewFlashlight);
-
-        try {
+/*        try {
             // MODE_PRIVATE = only this application
             db = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
             // Remove the table and start fresh
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_FLASHLIGHT);
-
-            db.execSQL(" CREATE TABLE IF NOT EXISTS " + TABLE_FLASHLIGHT + "(" + FLASHLIGHT_KEY_ID
-                    + " INTEGER PRIMARY KEY AUTOINCREMENT, " + FLASHLIGHT_NAME + " VARCHAR);");
-
-            db.execSQL("INSERT INTO " + TABLE_FLASHLIGHT + "(" + FLASHLIGHT_NAME + ") VALUES " +
-                    "('ON');");
-            db.execSQL("INSERT INTO " + TABLE_FLASHLIGHT + "(" + FLASHLIGHT_NAME + ") VALUES " +
-                    "('OFF');");
-            db.execSQL("INSERT INTO " + TABLE_FLASHLIGHT + "(" + FLASHLIGHT_NAME + ") VALUES " +
-                    "('GLITCHING');");
-
-            ArrayList<String> list = new ArrayList<String>();
-            ArrayList<String> list2 = new ArrayList<String>();
-
-            ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(),
-                    android.R.layout.simple_spinner_item, list);
-
-            // Select a record and set the cursor object
-            Cursor cursor = db.rawQuery("Select * FROM " + TABLE_FLASHLIGHT, null);
-            if (cursor != null) {
-                cursor.moveToFirst();
-                do {
-                    list.add(cursor.getString(1));
-                    list2.add(cursor.getString(0));
-                    for (int i = 0; i < list2.size(); i++) {
-                        String msg = list2.get(i) + ": " + list.get(i);
-                        Log.i("DATABASE ITEM", msg);
-                    }
-                    /*for (int i = 0; i < list2.size(); i++) {
-                        Log.i("DATABASE ITEM ID", list2.get(i));
-                    }
-
-                    for (int i = 0; i < list.size(); i++) {
-                        Log.i("DATABASE ITEM", list.get(i));
-                    }*/
-                    //gridF.setAdapter(adapter1);
-                    //gridF.setVisibility(View.VISIBLE);
-
-                } while (cursor.moveToNext());
-            }
+            db.execSQL(SQL_DELETE_ENTRIES);
+            db.execSQL(SQL_CREATE_ENTRIES);*/
+/*
 
         } catch (Exception e) {
             Log.d(TAG, e.toString());
             Log.e("Error:", e.toString());
             Toast.makeText(getApplicationContext(), "Database Issue: " + e.toString(), Toast
                     .LENGTH_LONG).show();
-        }
-        finally { // This will always execute
+        }*/
+        /*finally { // This will always execute
             Log.d("Data written:", " ");
             db.close();
+        }*/
+
+    }
+
+    private void addEntry(String columnName, String entry) {
+        String a = "";
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            LocalDateTime localDateTime = LocalDateTime.now();
+            a = localDateTime.toString();
+            System.out.println(a);
+            Log.i(TAG, "If: " + a, null);
+        } else {
+            Calendar cal = Calendar.getInstance();
+            Date date = cal.getTime();
+            DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
+            a = dateFormat.format(date);
+            System.out.println(a);
+            Log.i(TAG, "Else: " + a, null);
         }
 
+        try {
+            db = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
+            //db.execSQL(SQL_DELETE_ENTRIES);
+            db.execSQL("CREATE TABLE IF NOT EXISTS  " + TABLE_NAME + " (" + COLUMN_NAME_ID + " " +
+                    "INTEGER " +
+                    "PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME_MODE + " VARCHAR, " +
+                    COLUMN_NAME_DATE + " VARCHAR)");
+
+            db.execSQL("INSERT INTO " + TABLE_NAME + " (" + columnName + ", " +
+                    COLUMN_NAME_DATE + ")" +
+                    " VALUES " + "('" + entry + "','" + a + "');");
+
+
+        } catch (SQLException e) {
+            Log.e(TAG, "SQLite error", e);
+        }
+    }
+
+    public void showDbEntries(View v) {
+        try {
+            db = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
+
+            ArrayList<String> list = new ArrayList<String>();
+            ArrayList<String> list2 = new ArrayList<String>();
+            ArrayList<String> list3 = new ArrayList<String>();
+
+            ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(),
+                    android.R.layout.simple_spinner_item, list);
+
+            Log.i(TAG, "===========DATABASE ENTRIES===========", null);
+
+            // Select a record and set the cursor object
+            Cursor cursor = db.rawQuery("Select * FROM " + TABLE_NAME, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                do {
+                    list.add(cursor.getString(2));
+                    list2.add(cursor.getString(1));
+                    list3.add(cursor.getString(0));
+                } while (cursor.moveToNext());
+                cursor.close();
+
+                for (int i = 0; i < list2.size(); i++) {
+                    String msg = list2.get(i) + ": " + list.get(i) + ": #" + list3.get(i);
+                    Log.i("DATABASE ITEM", msg);
+                }
+            }
+        } catch (SQLException e) {
+            Log.e(TAG, "SQLite error", e);
+        }
     }
 
     private void flashLightOn() {
@@ -174,6 +216,15 @@ public class MainActivity extends AppCompatActivity {
                 buttonEnable.setBackgroundColor(getColor((R.color.red)));
                 imageFlashlight.setImageResource(R.drawable.ic_flash);
                 flashStatus.setText(R.string.flash_on);
+
+                /*db = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
+                db.execSQL(SQL_DELETE_ENTRIES);
+                db.execSQL(SQL_CREATE_ENTRIES);
+
+                db.execSQL("INSERT INTO " + TABLE_NAME + " (" + COLUMN_NAME_MODE + ") VALUES" +
+                        "('ON');");
+                */
+                addEntry("mode", "ON");
             }
 
         } catch (CameraAccessException e) {
@@ -195,6 +246,8 @@ public class MainActivity extends AppCompatActivity {
                 buttonEnable.setBackgroundColor(getColor((R.color.darkGreen)));
                 imageFlashlight.setImageResource(R.drawable.ic_flash_off);
                 flashStatus.setText(R.string.flash_off);
+
+                addEntry("mode", "OFF");
 
             }
         } catch (CameraAccessException e) {
@@ -219,7 +272,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
