@@ -1,3 +1,5 @@
+/*
+
 package com.example.grover_flashlight;
 
 import android.content.Context;
@@ -5,15 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
-public class FlashlightEntry extends FlashlightReaderContract implements BaseColumns {
+public class FlashlightEntry extends FlashlightReaderContractj implements BaseColumns {
 
-    static final String TABLE_NAME = "entry";
+    static final String TABLE_NAME = "FLASHLIGHT2";
     static final String COLUMN_NAME_MODE = "mode";
     static final String COLUMN_NAME_DATE = "date";
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + FlashlightEntry.TABLE_NAME + " (" +
                     FlashlightEntry._ID + " INTEGER PRIMARY KEY," +
-                    FlashlightEntry.COLUMN_NAME_DATE + " DATETIME," +
+                    FlashlightEntry.COLUMN_NAME_DATE + " VARCHAR," +
                     FlashlightEntry.COLUMN_NAME_MODE + " TEXT)";
 
     private static final String SQL_DELETE_ENTRIES =
@@ -46,4 +48,4 @@ public class FlashlightEntry extends FlashlightReaderContract implements BaseCol
         }
     }
 }
-
+*/
