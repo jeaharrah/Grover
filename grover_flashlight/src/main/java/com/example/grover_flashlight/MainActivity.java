@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.Button;
 import android.widget.TextView;
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
             "DROP TABLE IF EXISTS " + TABLE_NAME;
 
     SQLiteDatabase db = null;
+
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,15 +170,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showDbEntries(View v) {
+        findViewById(R.id.flashControls).setVisibility(View.GONE);
+        findViewById(R.id.listViewLayout).setVisibility(View.VISIBLE);
+
         try {
             db = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
 
-            ArrayList<String> list = new ArrayList<String>();
-            ArrayList<String> list2 = new ArrayList<String>();
-            ArrayList<String> list3 = new ArrayList<String>();
+            ArrayList<String> timeList = new ArrayList<String>();
+            ArrayList<String> modeList = new ArrayList<String>();
+            ArrayList<String> idList = new ArrayList<String>();
+            ArrayList<String> concatenatedItem = new ArrayList<String>();
 
-            ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(),
-                    android.R.layout.simple_spinner_item, list);
+
 
             Log.i(TAG, "===========DATABASE ENTRIES===========", null);
 
@@ -184,20 +190,32 @@ public class MainActivity extends AppCompatActivity {
             if (cursor != null) {
                 cursor.moveToFirst();
                 do {
-                    list.add(cursor.getString(2));
-                    list2.add(cursor.getString(1));
-                    list3.add(cursor.getString(0));
+                    timeList.add(cursor.getString(2));
+                    modeList.add(cursor.getString(1));
+                    idList.add(cursor.getString(0));
                 } while (cursor.moveToNext());
                 cursor.close();
 
-                for (int i = 0; i < list2.size(); i++) {
-                    String msg = list2.get(i) + ": " + list.get(i) + ": #" + list3.get(i);
+                for (int i = 0; i < modeList.size(); i++) {
+                    String msg = "#" + idList.get(i) + ": " + modeList.get(i) + " - " + timeList
+                            .get(i);
+                    concatenatedItem.add(msg);
                     Log.i("DATABASE ITEM", msg);
                 }
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                        android.R.layout.simple_list_item_1, concatenatedItem);
+
+                listView = findViewById(R.id.listViewWidget);
+                listView.setAdapter(arrayAdapter);
             }
         } catch (SQLException e) {
             Log.e(TAG, "SQLite error", e);
         }
+    }
+
+    public void hideDbEntries(View view) {
+        findViewById(R.id.listViewLayout).setVisibility(View.GONE);
+        findViewById(R.id.flashControls).setVisibility(View.VISIBLE);
     }
 
     private void flashLightOn() {
