@@ -6,52 +6,90 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <ImageView
-        android:id="@+id/imageFlashStatus"
-        android:contentDescription="Flash Status Icon"
+    <RelativeLayout
+        android:id="@+id/flashControls"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_above="@id/flashStatus"
-        android:src="@drawable/ic_flash_off"/>
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/flashStatus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/buttonEnable"
-        android:paddingBottom="25dp"
-        android:text="@string/flash_off"
-        android:textColor="@color/black"
-        android:textSize="28sp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif"/>
+        <ImageView
+            android:id="@+id/imageFlashStatus"
+            android:contentDescription="Flash Status Icon"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_above="@id/flashStatus"
+            android:src="@drawable/ic_flash_off"/>
 
-    <Button
-        android:id="@+id/buttonEnable"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="40dp"
-        android:background="@color/darkGreen"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="@string/enable_flash"
-        android:textColor="@color/white"
-        android:textSize="25sp" />
+        <TextView
+            android:id="@+id/flashStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/buttonEnable"
+            android:paddingBottom="25dp"
+            android:text="@string/flash_off"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"/>
 
-    <Button
-        android:id="@+id/buttonDisplay"
+        <Button
+            android:id="@+id/buttonEnable"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="40dp"
+            android:background="@color/darkGreen"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/enable_flash"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/buttonDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/darkGreen"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="Show DB Entries"
+            android:textColor="@color/white"
+            android:layout_below="@id/buttonEnable"
+            android:textSize="18sp"
+            android:onClick="showDbEntries"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/listViewLayout"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/darkGreen"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="Show DB Entries"
-        android:textColor="@color/white"
-        android:layout_below="@id/buttonEnable"
-        android:textSize="18sp"
-        android:onClick="showDbEntries"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <Button
+            android:id="@+id/buttonHide"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/darkGreen"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_above="@id/listViewWidget"
+            android:text="Hide DB Entries"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:onClick="hideDbEntries"
+            android:gravity="top|center_horizontal"/>
+
+        <ListView
+            android:id="@+id/listViewWidget"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_alignParentBottom="true">
+        </ListView>
+
+
+    </RelativeLayout>
 
 
 </RelativeLayout>
