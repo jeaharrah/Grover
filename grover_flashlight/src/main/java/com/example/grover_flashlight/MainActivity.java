@@ -135,20 +135,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addEntry(String columnName, String entry) {
-        String a = "";
+        String dateString = "";
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             LocalDateTime localDateTime = LocalDateTime.now();
-            a = localDateTime.toString();
-            System.out.println(a);
-            Log.i(TAG, "If: " + a, null);
+            dateString = localDateTime.toString();
+            System.out.println(dateString);
+            Log.i(TAG, "If: " + dateString, null);
         } else {
             Calendar cal = Calendar.getInstance();
             Date date = cal.getTime();
             DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance();
-            a = dateFormat.format(date);
-            System.out.println(a);
-            Log.i(TAG, "Else: " + a, null);
+            dateString = dateFormat.format(date);
+            System.out.println(dateString);
+            Log.i(TAG, "Else: " + dateString, null);
         }
 
         try {
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
             db.execSQL("INSERT INTO " + TABLE_NAME + " (" + columnName + ", " +
                     COLUMN_NAME_DATE + ")" +
-                    " VALUES " + "('" + entry + "','" + a + "');");
+                    " VALUES " + "('" + entry + "','" + dateString + "');");
 
 
         } catch (SQLException e) {
