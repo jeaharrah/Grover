@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
 
         buttonEnable.setEnabled(!isEnabled);
 
+        toolbar.setNavigationIcon(R.drawable.ic_flash_white);
+
         // Set onClick listener for the button
         // If pressed, the program will request permission to access the camera
         buttonEnable.setOnClickListener(new View.OnClickListener() {
